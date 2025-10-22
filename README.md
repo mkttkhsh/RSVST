@@ -2,7 +2,7 @@
 
 **Companion code for the arXiv preprint:**  
 > *Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting*  
-> Makoto Takahashi, Wataru Omori, Yusuke Watanabe, and Shinya Yamauchi  
+> Makoto Takahashi, Yuta Yamauchi, Toshiaki Watanabe, and Yasuhiro Omori
 > [arXiv:2501.13179](https://arxiv.org/abs/2401.13179)
 
 ---
@@ -10,7 +10,7 @@
 ## Overview
 
 This repository provides **Ox source code** and a **synthetic-data simulation pipeline** for reproducing the results in the above paper.  
-The project implements **Realized Stochastic Volatility (RSV)** and **EGARCH-GED** models for volatility and quantile forecasting, with extensions to the **skew-t** distribution.
+The project implements **Realized Stochastic Volatility (RSV)** for volatility and quantile forecasting, with extensions to the **skew-t** distribution.
 
 The empirical high-frequency data (Oxford Realized Library) are **not included** due to licensing restrictions, but all estimation, simulation, and evaluation procedures can be replicated using the provided synthetic-data routines.
 
@@ -91,7 +91,7 @@ If you use this code or derivative work, please cite:
 ```
 Takahashi, M., Omori, W., Watanabe, Y., & Yamauchi, S. (2025).
 Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting.
-arXiv preprint arXiv:2501.xxxxx
+arXiv preprint arXiv:2501.13179
 ```
 
 BibTeX:
@@ -99,7 +99,7 @@ BibTeX:
 @article{takahashi2025rsvst,
   title={Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting},
   author={Takahashi, Makoto and Omori, Wataru and Watanabe, Yusuke and Yamauchi, Shinya},
-  journal={arXiv preprint arXiv:2501.xxxxx},
+  journal={arXiv preprint arXiv:2501.13179},
   year={2025}
 }
 ```
