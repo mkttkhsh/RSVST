@@ -89,7 +89,7 @@ Users with legitimate access can reproduce the real-data analysis by specifying 
 If you use this code or derivative work, please cite:
 
 ```
-Takahashi, M., Omori, W., Watanabe, Y., & Yamauchi, S. (2025).
+Takahashi, M., Yamauchi, Y., Watanabe, T., & Omori, Y. (2025).
 Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting.
 arXiv preprint arXiv:2501.13179
 ```
@@ -98,7 +98,7 @@ BibTeX:
 ```bibtex
 @article{takahashi2025rsvst,
   title={Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting},
-  author={Takahashi, Makoto and Omori, Wataru and Watanabe, Yusuke and Yamauchi, Shinya},
+  author={Takahashi, Makoto and Yamauchi, Yuta and Watanabe, Toshiaki and Omori, Yasuhiro},
   journal={arXiv preprint arXiv:2501.13179},
   year={2025}
 }
