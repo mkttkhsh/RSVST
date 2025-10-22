@@ -2,7 +2,7 @@
 
 **Companion code for the arXiv preprint:**  
 > *Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting*  
-> Makoto Takahashi, Yuta Yamauchi, Toshiaki Watanabe, and Yasuhiro Omori
+> Makoto Takahashi, Yuta Yamauchi, Toshiaki Watanabe, and Yasuhiro Omori  
 > [arXiv:2501.13179](https://arxiv.org/abs/2401.13179)
 
 ---
