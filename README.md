@@ -1,80 +1,120 @@
-# RSVST
+# RSVST: Realized Stochastic Volatility Model with Skew-t Distributions
 
-Public, reproducible Ox code for the paper:
+**Companion code for the arXiv preprint:**  
+> *Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting*  
+> Makoto Takahashi, Wataru Omori, Yusuke Watanabe, and Shinya Yamauchi  
+> [arXiv:2501.xxxxx](https://arxiv.org/abs/2501.xxxxx)
 
-> **Realized Stochastic Volatility Model with Skew‑t Distributions for Improved Volatility and Quantile Forecasting**  
-(<https://arxiv.org/abs/2401.13179>, 2026)
+---
 
-## What's here
+## Overview
 
-- **Fully runnable synthetic-data pipeline** (no proprietary data required)
-- Ox source code for RSV and EGARCH‑GED benchmarks
-- Forecast evaluation (incl. Diebold–Mariano 1995) and figure/table exporters
-- Clean repo structure ready for GitHub → Zenodo DOI
+This repository provides **Ox source code** and a **synthetic-data simulation pipeline** for reproducing the results in the above paper.  
+The project implements **Realized Stochastic Volatility (RSV)** and **EGARCH-GED** models for volatility and quantile forecasting, with extensions to the **skew-t** distribution.
+
+The empirical high-frequency data (Oxford Realized Library) are **not included** due to licensing restrictions, but all estimation, simulation, and evaluation procedures can be replicated using the provided synthetic-data routines.
+
+---
+
+## Contents
+
+```
+RSVST/
+├─ ox/
+│  ├─ run_estimation.ox         # Main entry point
+│  ├─ simulate_data.ox          # Synthetic data generator
+│  ├─ models_impl.ox            # RSV & EGARCH-GED estimation (skeleton)
+│  ├─ postproc.ox               # Forecast evaluation and export
+│  └─ utils.ox                  # CLI parser and helpers
+├─ config/config.ini.example    # Example configuration file
+├─ scripts/run_synth.sh         # One-command synthetic run
+├─ results/                     # Output directory (empty by default)
+├─ data_description.txt         # Variables and data policy
+└─ README.md                    # This file
+```
+
+---
 
 ## Requirements
 
-- Ox / `oxl` (e.g., Ox 9.x). Confirm with:
-  ```
+- **Ox / `oxl`** version 9.x or later  
+  Check installation with:
+  ```bash
   oxl -v
   ```
-- macOS / Linux shell (Windows WSL is fine)
+- macOS / Linux / WSL (Windows Subsystem for Linux)
 
-## Quick start (synthetic data)
+---
+
+## Quick start (synthetic run)
 
 ```bash
 bash scripts/run_synth.sh
-# or invoke directly:
+# or
 oxl ox/run_estimation.ox --config=config/config.ini.example --mode=synthetic
 ```
 
-Outputs will be written to `results/`.
+Outputs (tables, figures) will be generated in `results/`.
 
-## Real-data run (for licensed users)
+---
 
-The empirical high-frequency data (e.g., Oxford Realized Library) are **not included**.
-If you have a legitimate license, place CSV files in a local directory and run:
+## Real-data replication (licensed users)
+
+Researchers with legitimate access to the **Oxford Realized Library** or equivalent high-frequency data can replicate the empirical results as follows:
 
 ```bash
+cp config/config.ini.example config/config.ini
+# Edit config.ini to specify your data directory
 oxl ox/run_estimation.ox --config=config/config.ini --mode=real --data_dir=/path/to/realdata
 ```
 
-Provide your own `config/config.ini` (copy from `config/config.ini.example`).
+Expected variables:
+- `date` (YYYYMMDD)
+- `rcc` – daily return
+- `rv` – 5-min realized variance
+- `rk` – realized kernel (Parzen)
 
-## Data & Code Availability Statement (journal-ready)
+---
 
-The high-frequency data used in the empirical analysis are obtained under a paid license that **prohibits redistribution**.
-Consistent with journal policy, we release **all Ox code** and a **synthetic-data pipeline** that reproduces the full
-estimation and forecasting workflow. Users with legitimate access to the licensed data can re-run the real-data analysis
-by supplying `--mode=real --data_dir=...`.
+## Data and Code Availability Statement
 
-## Repository layout
+All **Ox codes** and **synthetic data pipelines** are publicly released under the MIT License.  
+The empirical data are obtained under a paid license (Oxford Realized Library) and cannot be redistributed.  
+Users with legitimate access can reproduce the real-data analysis by specifying `--mode=real` and providing their local data path.
 
-```
-IJF_Revision_Ox/
-├─ README.md
-├─ LICENSE
-├─ .gitignore
-├─ config/
-│   └─ config.ini.example
-├─ ox/
-│   ├─ run_estimation.ox
-│   ├─ simulate_data.ox
-│   ├─ models.oxh
-│   ├─ models_impl.ox
-│   ├─ postproc.ox
-│   └─ utils.ox
-├─ scripts/
-│   ├─ run_synth.sh
-│   └─ run_real_template.sh
-├─ results/
-│   └─ .gitkeep
-└─ data_description.txt
-```
+---
 
 ## Citation
 
-When you cite the code, please reference the GitHub release and (if enabled) the Zenodo DOI.
+If you use this code or derivative work, please cite:
+
+```
+Takahashi, M., Omori, W., Watanabe, Y., & Yamauchi, S. (2025).
+Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting.
+arXiv preprint arXiv:2501.xxxxx
+```
+
+BibTeX:
+```bibtex
+@article{takahashi2025rsvst,
+  title={Realized Stochastic Volatility Model with Skew-t Distributions for Improved Volatility and Quantile Forecasting},
+  author={Takahashi, Makoto and Omori, Wataru and Watanabe, Yusuke and Yamauchi, Shinya},
+  journal={arXiv preprint arXiv:2501.xxxxx},
+  year={2025}
+}
+```
 
 ---
-Maintainer: Makoto Takahashi
+
+## License
+
+This repository is released under the **MIT License**.  
+You are free to use, modify, and redistribute the code, provided that appropriate credit is given.
+
+---
+
+## Contact
+
+Maintainer: **Makoto Takahashi**  
+Faculty of Business Administration, Hosei University  
+GitHub: [mkttkhsh](https://github.com/mkttkhsh)
