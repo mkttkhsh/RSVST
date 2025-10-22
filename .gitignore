@@ -1,0 +1,32 @@
+# Build artifacts and outputs
+results/*
+!results/.gitkeep
+logs/
+*.log
+*.csv
+*.rds
+*.parquet
+*.png
+*.pdf
+*.tex
+*.zip
+
+# Data (keep out proprietary / licensed data)
+data/
+*.feather
+
+# Local configs / secrets
+config/config.ini
+.env
+*.key
+*.pem
+id_rsa
+.Rprofile
+.Renviron
+.Rhistory
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
