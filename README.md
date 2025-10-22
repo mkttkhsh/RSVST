@@ -1,4 +1,4 @@
-# IJF_Revision_Ox
+# RSVST
 
 Public, reproducible Ox code for the paper:
 
