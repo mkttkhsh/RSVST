@@ -169,7 +169,7 @@ RSVGH::SimObs(const ns, const dphi, const dsigeta, const drho,
 	m_vh_t = vh;
 	m_vz_t = vz;	
 	
-	print("\n>>> Data is simualted. [RSV");
+	print("\n>>> Data is simulated. [RSV");
 	if(m_flbc)
 		print("C");
 	if(m_flt)
@@ -331,7 +331,6 @@ RSVGH::MCMC(const nsim, const nburn)
 		dxi     = m_vposm[4+m_flt+m_flb];
 		dpsi    = m_flbc ? m_vposm[4+m_flt+m_flb+1] : 1;
 		dsigu   = m_vposm[5+m_flt+m_flb+m_flbc];
-//		println(dbeta ~ dnu ~ dpsi);
 	}
 
 	/*--- prior ---*/
@@ -423,7 +422,6 @@ RSVGH::MCMC(const nsim, const nburn)
 	}
 
 	/*--- set sample option ---*/
-//	nburn = 0.1 * nsim;	//burn-in period
 	npmt = 6+m_flt+m_flb+m_flbc;	//# of parameter
 
 	
@@ -1264,18 +1262,6 @@ RSVGH::SampNu(const dphi, const dsigeta, const drho, const dmu, const dbeta, con
 	dS = -1 / dhe;
 	dm = dnum + dS * dsc;
 
-//	if(probn((log(4)-dm)/sqrt(dS))>0.99)
-//	{
-//		if(m_k>=0 && !m_flML) m_cnu1++;
-////		print("nu1! ");
-////		print("\nIteration: ","%5.0f",m_k,"\n  Mode=","%6.1f",dm," with SD=","%6.1f",sqrt(dS)," is too small");
-//		dnum = log(4.1);
-//		fPosNu(dnum, &dlm, 0, 0);
-//	  	Num1Derivative(fPosNu, dnum, &dsc);
-//	  	Num2Derivative(fPosNu, dnum, &dhe);
-//		dS = -1 / dhe;
-//		dm = dnum + dS * dsc;
-//	}
 	nite = 0;
 	do{
 		nite++;
@@ -1283,8 +1269,6 @@ RSVGH::SampNu(const dphi, const dsigeta, const drho, const dmu, const dbeta, con
 		if(nite>100)
 		{
 			if(m_k>=0 && !m_flML) m_cnu2++;
-//			print("\nStep: ","%5.0f",nite," dm=","%6.1f",dm," dS=",dS,"%6.1f","dnunt=","%6.1f",dnunt);
-//			print("nu2! ");
 			dnunt = log(4) + sqrt(dS)*fabs(rann(1,1));
 		}
 	}while(dnunt <= log(4) && nite<=100);
@@ -1423,7 +1407,7 @@ RSVGH::SampXi(const dpsi, const dsigu, const vh)
 }
 
 /*
-** SampXi samples parameter xi
+** SampPsi samples parameter psi
 */
 RSVGH::SampPsi(const dxi, const dsigu, const vh)
 {
@@ -1461,8 +1445,6 @@ RSVGH::SampSigu(const dxi, const dpsi, const vh)
 
 	dn = 0.5*m_ns + m_dsun0;
 	dd = m_dsuS0 + 0.5 * sumsqrc(m_my[][1]-dxi-dpsi*vh);
-
-	dsigu = sqrt(1 / rangamma(1, 1, dn, dd));
 
 	if(!m_flML)	//parameter estimation
 		dsigu = sqrt(1 / rangamma(1, 1, dn, dd));
