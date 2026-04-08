@@ -40,20 +40,30 @@ The empirical high-frequency data (Oxford Realized Library) are **not included**
 
 ```
 RSVST/
-├── ox/
-│   ├── run_estimation.ox     # Main entry point
-│   ├── simulate_data.ox      # Synthetic data generator
-│   ├── models.oxh            # Class declarations
-│   ├── models_impl.ox        # RSV & EGARCH-GED estimation
-│   ├── postproc.ox           # Forecast evaluation and export
-│   └── utils.ox              # CLI parser and helpers
+├── empirical/                # MCMC estimation code (empirical analysis)
+│   ├── RSVAZ.ox / RSVAZ.h   # RSV-Azzalini model class
+│   ├── RSVGH.ox / RSVGH.h   # RSV-GH model class
+│   ├── SVAZ.ox  / SVAZ.h    # SV-Azzalini model class (benchmark)
+│   ├── SVGH.ox  / SVGH.h    # SV-GH model class (benchmark)
+│   ├── rsv_az_st_*_prediction.ox   # Rolling forecast scripts
+│   ├── rsv_gh_st_*_prediction.ox
+│   ├── sv_az_st_*_prediction.ox
+│   ├── *_simulation.ox              # Monte Carlo simulation scripts
+│   ├── merge_prediction_results_*.ox
+│   └── README.md
+├── ox/                       # Synthetic-data pipeline (skeleton)
+│   ├── run_estimation.ox
+│   ├── simulate_data.ox
+│   ├── models.oxh / models_impl.ox
+│   ├── postproc.ox / utils.ox
 ├── config/
-│   └── config.ini.example    # Example configuration
+│   └── config.ini.example
 ├── scripts/
-│   ├── run_synth.sh          # One-command synthetic run
-│   └── run_real_template.sh  # Template for real-data run
+│   ├── run_synth.sh
+│   └── run_real_template.sh
+├── data/                     # Place data files here (not included)
 ├── results/                  # Output directory (empty by default)
-├── data_description.txt      # Expected data format
+├── data_description.txt
 ├── LICENSE
 └── README.md
 ```
@@ -67,7 +77,20 @@ RSVST/
 
 ---
 
-## Quick Start (synthetic data)
+## Quick Start
+
+### Empirical analysis (MCMC, requires licensed data)
+
+```bash
+# Place data files in data/ (see data_description.txt)
+cd RSVST/empirical
+oxl rsv_az_st_djia_prediction.ox   # RSV-AZ-ST on DJIA
+oxl rsv_gh_st_n225_prediction.ox   # RSV-GH-ST on Nikkei 225
+```
+
+See [`empirical/README.md`](empirical/README.md) for data format and MCMC settings.
+
+### Synthetic-data pipeline
 
 ```bash
 git clone https://github.com/mkttkhsh/RSVST.git
