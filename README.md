@@ -21,16 +21,22 @@ h_{t+1} = phi * h_t + sigma_eta * eta_t,   Corr(eps_t, eta_t) = rho
 
 where `eps_t` follows a skew-t distribution. Models implemented:
 
-| Model | Distribution of eps_t | Type |
-|-------|-----------------------|------|
-| RSV-AZ-N  | Normal | RSV |
-| RSV-AZ-SN | Azzalini skew-normal | RSV |
-| RSV-AZ-T  | Student-*t* | RSV |
-| RSV-AZ-ST | Azzalini skew-*t* | RSV |
-| RSV-GH-ST | Generalized Hyperbolic skew-*t* | RSV |
-| EGARCH-GED | Generalized Error Distribution | GARCH |
+| Model | Distribution of eps_t | Skewness param | Type |
+|-------|-----------------------|----------------|------|
+| RSV-AZ-N  | Normal | — | RSV |
+| RSV-AZ-SN | Azzalini skew-normal | δ | RSV |
+| RSV-AZ-T  | Student-*t* | — | RSV |
+| RSV-AZ-ST | Azzalini skew-*t* | δ | RSV |
+| RSV-GH-ST | Generalized Hyperbolic skew-*t* | β | RSV |
+| RSV-FS-SN | Fernández-Steel skew-normal | γ | RSV |
+| RSV-FS-ST | Fernández-Steel skew-*t* | γ | RSV |
+| SV-AZ-ST  | Azzalini skew-*t* | δ | SV (benchmark) |
+| SV-AZ-SN  | Azzalini skew-normal | δ | SV (benchmark) |
+| SV-GH-ST  | Generalized Hyperbolic skew-*t* | β | SV (benchmark) |
+| SV-FS-ST  | Fernández-Steel skew-*t* | γ | SV (benchmark) |
+| EGARCH-GED | Generalized Error Distribution | — | GARCH (benchmark) |
 
-Each RSV model is estimated by **Bayesian MCMC** (Gibbs + Metropolis-Hastings) with **1-step-ahead rolling forecasts** for volatility, Value-at-Risk (VaR), and Expected Shortfall (ES).
+Each RSV/SV model is estimated by **Bayesian MCMC** (Gibbs + Metropolis-Hastings) with **1-step-ahead rolling forecasts** for volatility, Value-at-Risk (VaR), and Expected Shortfall (ES).
 
 The empirical high-frequency data (Oxford Realized Library) are **not included** due to licensing restrictions. All estimation and evaluation procedures can be replicated with the provided synthetic-data routines.
 
@@ -41,10 +47,12 @@ The empirical high-frequency data (Oxford Realized Library) are **not included**
 ```
 RSVST/
 ├── empirical/                # MCMC estimation code (empirical analysis)
-│   ├── RSVAZ.ox / RSVAZ.h   # RSV-Azzalini model class
-│   ├── RSVGH.ox / RSVGH.h   # RSV-GH model class
-│   ├── SVAZ.ox  / SVAZ.h    # SV-Azzalini model class (benchmark)
-│   ├── SVGH.ox  / SVGH.h    # SV-GH model class (benchmark)
+│   ├── RSVAZ.ox / RSVAZ.h        # RSV-Azzalini model class (N/SN/T/ST variants)
+│   ├── RSVGH.ox / RSVGH.h        # RSV-GH model class
+│   ├── SVAZ.ox  / SVAZ.h         # SV-Azzalini model class (benchmark)
+│   ├── SVGH.ox  / SVGH.h         # SV-GH model class (benchmark)
+│   ├── RSV_skewFS.ox / RSV_skewFS.h  # RSV/SV Fernández-Steel model class
+│   ├── ReportMCMC.ox / ReportMCMC.h  # MCMC reporting utility (used by RSV_skewFS)
 │   ├── rsv_az_st_*_prediction.ox   # Rolling forecast scripts
 │   ├── rsv_gh_st_*_prediction.ox
 │   ├── sv_az_st_*_prediction.ox
@@ -88,7 +96,14 @@ oxl rsv_az_st_djia_prediction.ox   # RSV-AZ-ST on DJIA
 oxl rsv_gh_st_n225_prediction.ox   # RSV-GH-ST on Nikkei 225
 ```
 
-See [`empirical/README.md`](empirical/README.md) for data format and MCMC settings.
+For the Fernández-Steel model, use `RSV_skewFS_run1.ox` as a template and set `mode = "est"`:
+
+```bash
+cd RSVST/empirical
+oxl RSV_skewFS_run1.ox             # RSV-FS-ST (edit dataset and mode inside)
+```
+
+See [`empirical/README.md`](empirical/README.md) for data format, MCMC settings, and prior specification.
 
 ### Synthetic-data pipeline
 
