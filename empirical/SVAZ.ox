@@ -134,9 +134,6 @@ SVAZ::SimObs(const ns, const dphi, const dsig, const drho, const dmu, const ddel
 	// Generate log-volatilities
 	mSigsq = choleski(1 ~ drho*dsig | drho*dsig ~ dsig^2);
 	me = (mSigsq * rann(2,ns))';
-//	me = zeros(ns, 2);
-//	me[][1] = dsig * rann(ns,1);
-//	me[][0] = drho*me[][1]/dsig + sqrt(1-drho^2)*rann(ns,1);
 	vh = zeros(ns, 1);
 	vh[0] = dmu + rann(1, 1) * dsig / sqrt(1-dphi^2);
 	for(t=0; t<ns-1; t++){
@@ -186,7 +183,7 @@ SVAZ::SimObs(const ns, const dphi, const dsig, const drho, const dmu, const ddel
 	m_vlambda_t = vlambda;
 	m_vz0_t = vz0;
 	
-	print("\n>>> Data is simualted. [SV-AZ-");
+	print("\n>>> Data is simulated. [SV-AZ-");
 	if(m_fls)
 		print("S");
 	if(m_flt){
@@ -348,7 +345,6 @@ SVAZ::MCMC(const nsim, const nburn)
 		dmu  = m_vposm[3];
 		ddelta = m_fls ? m_vposm[4] : 0;
 		dnu    = m_flt ? m_vposm[4+m_fls] : M_INF_POS;
-//		println(ddelta ~ dnu);
 	}
 
 	// Auxiliary varialbe: z_{0t}
@@ -429,7 +425,6 @@ SVAZ::MCMC(const nsim, const nburn)
 	}
 
 	/*--- Set sample option ---*/
-//	nburn = 0.1 * nsim;	//burn-in period
 	npmt = 4+m_fls+m_flt; //number of parameters
 
 	if(!m_flML)	/*--------- parameter estimation --------*/
@@ -1223,8 +1218,7 @@ SVAZ::fLogPosDelta(const dp, const dfunc, const dsc, const dhe)
 	decl ddelta, dmu, dphi, dsig, drho, dnu;
 	decl dmu_lambda, dc, dk_delta, vyt, vhb;
 
-	// set parameters	
-//	ddelta = dp / sqrt(1 + dp^2);
+	// set parameters
 	ddelta = 2 / (1 + exp(-dp)) - 1;
 	dmu = m_vpar[0];
 	dphi = m_vpar[1];
@@ -1234,9 +1228,9 @@ SVAZ::fLogPosDelta(const dp, const dfunc, const dsc, const dhe)
 
 	// define variables
 	if(m_flt) dmu_lambda = dnu / (dnu - 2);
-	else dmu_lambda = 1;	
+	else dmu_lambda = 1;
 	dc = sqrt(2 / M_PI);
-	dk_delta = sqrt((1-ddelta^2) / (1-dc^2*ddelta^2));	
+	dk_delta = sqrt((1-ddelta^2) / (1-dc^2*ddelta^2));
 	vyt = m_vy - sqrt(m_vlambda/dmu_lambda).*exp(m_vh/2)*ddelta.*(m_vz0-dc)/sqrt(1-dc^2*ddelta^2);
 	vhb = m_vh - dmu;
 
@@ -1263,24 +1257,19 @@ SVAZ::SampDelta(const dmu, const dphi, const dsig, const drho, const ddeltao, co
 	m_vlambda = vlambda;
 	m_vy = vy;
 
-//	dparo = dparm = ddeltao / sqrt(1 - ddeltao^2); //transformed
 	dparo = dparm = log((1+ddeltao)/(1-ddeltao)); //transformed
 	MaxBFGS(fLogPosDelta, &dparm, &dlm, 0, 1); //find mode
 	Num1Derivative(fLogPosDelta, dparm, &dsc);
 	Num2Derivative(fLogPosDelta, dparm, &dhe);
-//	dv = max(0.001, -1 / dhe);
 	dv = -1 / dhe;
 	dm = dparm + dv * dsc;
 	dparn = dm + sqrt(dv) * rann(1,1);
-//	ddeltan = dparn / sqrt(1 + dparn^2);
 	ddeltan = 2 / (1 + exp(-dparn)) - 1;
-	
+
 	// compute acceptance probability
-	fLogPosDelta(dparn, &dln, 0, 0); //log-posterior density at the candidate												    
-//	dhn = dlm + (dparn-dparm)*dsc - 0.5*(dparn-dparm)^2/dv - 1.5*log(1-ddeltan^2); //log-proposal density at the candidate 
-	dhn = dlm + (dparn-dparm)*dsc - 0.5*(dparn-dparm)^2/dv + log(2) - log(1-ddeltan^2); //log-proposal density at the candidate 
+	fLogPosDelta(dparn, &dln, 0, 0); //log-posterior density at the candidate
+	dhn = dlm + (dparn-dparm)*dsc - 0.5*(dparn-dparm)^2/dv + log(2) - log(1-ddeltan^2); //log-proposal density at the candidate
 	fLogPosDelta(dparo, &dlo, 0, 0); //log-posterior density at the old value
-//	dho = dlm + (dparo-dparm)*dsc - 0.5*(dparo-dparm)^2/dv - 1.5*log(1-ddeltao^2); //log-proposal density at the old value
 	dho = dlm + (dparo-dparm)*dsc - 0.5*(dparo-dparm)^2/dv + log(2) - log(1-ddeltao^2); //log-proposal density at the old value
 	dfrac = exp(dln - dhn - dlo + dho);
 
@@ -1389,24 +1378,8 @@ SVAZ::SampNu(const dmu, const dphi, const dsig, const drho, const ddelta, const 
   	Num1Derivative(fPosNu, dpm, &dsc);
   	Num2Derivative(fPosNu, dpm, &dhe);
 
-//	dv = max(0.001, -1 / dhe);
 	dv = -1 / dhe;
 	dm = dpm + dv * dsc;
-
-//	if(m_flnuarmh){
-//		//generate a candidate by A-R algorithm
-//		do{
-//			dpn = dm + sqrt(dv) * rann(1,1);
-//			dnun = exp(dpn) + 4;
-//			fPosNu(dpn, &dln, 0, 0); //log-posterior density at the candidate value
-//			dhn = dlm + (dpn-dpm)*dsc - 0.5*(dpn-dpm)^2/dv - log(dnun-4); //log-proposal density at the candidate value
-//			if(m_k>=0) m_can++;
-//		}while(ranu(1,1) > exp(dln - dhn));
-//	}
-//	else{
-//		dpn = dm + sqrt(dv) * rann(1,1); //generate a candidate
-//		dnun = exp(dpn) + 4;
-//	}
 
 	dpn = dm + sqrt(dv) * rann(1,1); //generate a candidate
 	dnun = exp(dpn) + 4;
@@ -1933,11 +1906,8 @@ SVAZ::ML(const nI, const nR, const nsim)
 	iBm = min(500, nsim/2);			//bandwidth
 
 	/*--- likelihood part ---*/
-	
 	vlik = PFilter(nI, nR);
-//	vlik = ones(3,1);
 
-	
 	/*--- posterior part ---*/
 
 	m_flML = 1;
