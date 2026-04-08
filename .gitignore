@@ -11,6 +11,13 @@ logs/
 *.tex
 *.zip
 
+# GitHub Pages source files are tracked (override above)
+!docs/**/*.md
+!docs/**/*.yml
+!docs/**/*.html
+!docs/**/*.css
+!docs/**/*.js
+
 # Data (keep out proprietary / licensed data)
 data/
 *.feather

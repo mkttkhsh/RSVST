@@ -1,0 +1,24 @@
+title: "RSVST: Realized Stochastic Volatility Model with Skew-t Distributions"
+description: >-
+  Companion code for the paper "Realized Stochastic Volatility Model with Skew-t Distributions
+  for Improved Volatility and Quantile Forecasting" (arXiv:2501.13179).
+baseurl: "/RSVST"
+url: "https://mkttkhsh.github.io"
+
+theme: minima
+
+author:
+  name: "Makoto Takahashi, Yuta Yamauchi, Toshiaki Watanabe, Yasuhiro Omori"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# GitHub Pages settings
+show_excerpts: true
+permalink: pretty
