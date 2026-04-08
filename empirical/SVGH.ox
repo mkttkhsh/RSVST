@@ -147,7 +147,7 @@ SVGH::SimObs(const ns, const dphi, const dsig, const drho, const dmu, const dbet
 	m_vh_t = vh;
 	m_vz_t = vz;
 	
-	print("\n>>> Data is simualted. [SV");
+	print("\n>>> Data is simulated. [SV");
 	if(m_flt)
 	{
 		if(m_flb) print("SK");
@@ -347,8 +347,6 @@ SVGH::MCMC(const nsim, const nburn)
 	}
 
 	/*--- set sample option ---*/
-
-//	nburn = 0.1 * nsim;	//burn-in period
 	npmt = 4 + m_flt + m_flb;			//# of parameters: phi, sigma, rho, mu, beta (if SKt), nu (if not normal)
 
 	
@@ -1575,28 +1573,6 @@ SVGH::ML(const nI, const nR, const nsim)
 	else
 		print("n model");
 	print("\n\n");
-//	print("Prior: (phi+1)/2  ~ Beta(", m_dap0, ", ", m_dbp0, ")\n");
-//	print("       sigma^(-2) ~ Gamma(", m_dn0, ", ", m_dS0, ")\n");
-//	print("       (rho+1)/2  ~ Beta(", m_dar0, ", ", m_dbr0, ")\n");
-//	print("       mu         ~ N(", m_dmm0, ", ", m_dsm0^2, ")\n");
-//	if(m_flt)
-//	{
-//		if(m_flb)
-//			print("       beta       ~ N(", m_db0, ", ", m_dsb02, ")\n");
-//		print("       nu         ~ Gamma(", m_dnn0, ", ", m_dnS0, ")\n");
-//		print("%c", {"Mean", "Stdev"}, "%r", {"       phi", "       sigma^(-2)", "       rho", "       nu"}, "%cf", {"%7.2f"},
-//		  fBetaMoment(m_dap0,m_dbp0,1)*2-1 ~ sqrt(fBetaMoment(m_dap0,m_dbp0,2))*2 |
-//		  fGammaMoment(m_dn0,m_dS0,1) ~ sqrt(fGammaMoment(m_dn0,m_dS0,2)) |
-//		  fBetaMoment(m_dar0,m_dbr0,1)*2-1 ~ sqrt(fBetaMoment(m_dar0,m_dbr0,2))*2 |
-//		  fGammaMoment(m_dnn0,m_dnS0,1) ~ sqrt(fGammaMoment(m_dnn0,m_dnS0,2)));
-//	}
-//	else
-//	{
-//		print("%c", {"Mean", "Stdev"}, "%r", {"       phi", "       sigma^(-2)", "       rho"}, "%cf", {"%7.2f"},
-//		  fBetaMoment(m_dap0,m_dbp0,1)*2-1 ~ sqrt(fBetaMoment(m_dap0,m_dbp0,2))*2 |
-//		  fGammaMoment(m_dn0,m_dS0,1) ~ sqrt(fGammaMoment(m_dn0,m_dS0,2)) |
-//		  fBetaMoment(m_dar0,m_dbr0,1)*2-1 ~ sqrt(fBetaMoment(m_dar0,m_dbr0,2))*2 );
-//	}
 	print("\n    ESTIMATION RESULT    (S.E.)"
 		  "\n--------------------------------");
 	print("%r",{" Likelihood", " Prior", " Posterior",
