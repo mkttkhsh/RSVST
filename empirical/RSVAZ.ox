@@ -135,9 +135,6 @@ RSVAZ::SimObs(const ns, const dphi, const dsig, const drho, const dmu, const dde
 	// Generate log-volatilities
 	mSigsq = choleski(1 ~ drho*dsig | drho*dsig ~ dsig^2);
 	me = (mSigsq * rann(2,ns))';
-//	me = zeros(ns, 2);
-//	me[][1] = dsig * rann(ns,1);
-//	me[][0] = drho*me[][1]/dsig + sqrt(1-drho^2)*rann(ns,1);
 	vh = zeros(ns, 1);
 	vh[0] = dmu + rann(1, 1) * dsig / sqrt(1-dphi^2);
 	for(t=0; t<ns-1; t++){
@@ -155,7 +152,7 @@ RSVAZ::SimObs(const ns, const dphi, const dsig, const drho, const dmu, const dde
 		}
 	}
 	else ddelta = 0;
-	dc = sqrt(2 / M_PI);
+	dc = sqrt(2 / M_PI);  // E[|Z|] for Z~N(0,1); mean of half-normal, used in skew-normal mean correction
 	veps = (ddelta.*(vz0-dc) + sqrt(1-ddelta^2).*me[][0]) ./ sqrt(1 - dc^2*ddelta^2);
 	dcov = drho * dsig * sqrt((1-ddelta^2)/(1-dc^2*ddelta^2)); //theoretical covariance between epsion and eta
 	dcorr = drho * sqrt((1-ddelta^2)/(1-dc^2*ddelta^2)); //theoretical correlation between epsion and eta
@@ -189,7 +186,7 @@ RSVAZ::SimObs(const ns, const dphi, const dsig, const drho, const dmu, const dde
 	m_vlambda_t = vlambda;
 	m_vz0_t = vz0;
 	
-	print("\n>>> Data is simualted. [RSV-AZ-");
+	print("\n>>> Data is simulated. [RSV-AZ-");
 	if(m_fls)
 		print("S");
 	if(m_flt){
@@ -363,7 +360,6 @@ RSVAZ::MCMC(const nsim, const nburn)
 		dnu    = m_flt ? m_vposm[4+m_fls] : M_INF_POS;
 		dxi    = m_vposm[4+m_fls+m_flt];
 		dsigu   = m_vposm[5+m_fls+m_flt];
-//		println(ddelta ~ dnu);
 	}
 
 	// Auxiliary varialbe: z_{0t}
@@ -452,7 +448,6 @@ RSVAZ::MCMC(const nsim, const nburn)
 	}
 
 	/*--- Set sample option ---*/
-//	nburn = 0.1 * nsim;	//burn-in period
 	npmt = 6+m_fls+m_flt; //number of parameters
 
 	if(!m_flML)	/*--------- parameter estimation --------*/
@@ -1016,9 +1011,6 @@ RSVAZ::fLogPosRho(const dp, const dfunc, const dsc, const dhe)
 	vy1t = m_vy1 - sqrt(m_vlambda/dmu_lambda).*exp(m_vh/2)*ddelta.*(m_vz0-dc)/sqrt(1-dc^2*ddelta^2);
 	vhb = m_vh - dmu;
 
-//	dfunc[0] = log(densbeta((drho+1)/2, m_dar0, m_dbr0)) - 0.5 * (m_ns - 1) * log(1 - drho^2)
-//				- 0.5*dmu_lambda/(dk_delta^2*(1-drho^2)) * sumc(exp(-m_vh[:m_ns-2])./m_vlambda[:m_ns-2] .* sqr(vy1t[:m_ns-2]
-//					- sqrt(m_vlambda[:m_ns-2]/dmu_lambda).*exp(m_vh[:m_ns-2]/2)*ddelta.*(vhb[1:]-dphi*vhb[:m_ns-2])/dsig));
 	dfunc[0] = (m_dar0-m_ns/2-0.5)*log(1+drho) + (m_dbr0-m_ns/2-0.5)*log(1-drho)
 				- 0.5*dmu_lambda/(dk_delta^2*(1-drho^2)) * sumc(exp(-m_vh[:m_ns-2])./m_vlambda[:m_ns-2] .* sqr(vy1t[:m_ns-2]
 					- sqrt(m_vlambda[:m_ns-2]/dmu_lambda)*drho.*exp(m_vh[:m_ns-2]/2)*dk_delta.*(vhb[1:]-dphi*vhb[:m_ns-2])/dsig));
@@ -1090,14 +1082,11 @@ RSVAZ::SampSigma(const dmu, const dphi, const dsigo, const drho, const ddelta, c
 
 	/*--- acceptance probability ---*/
 	vy1b = vy1 - sqrt(vlambda/dmu_lambda) .* exp(vh/2) * ddelta .* (vz0-dc) / sqrt(1-dc^2*ddelta^2);
-//	vy1b = sqrt(dmu_lambda./vlambda) * drho .* exp(-vh/2) .* vy1t / (dk_delta*(1-drho^2));
 	dA = sqrt(dmu_lambda)*drho / (dk_delta*(1-drho^2))
 			* sumc(exp(-vh[:m_ns-2]/2)  ./ sqrt(vlambda[:m_ns-2]) .* vy1b[:m_ns-2] .* (vhb[1:]-dphi*vhb[:m_ns-2]));
 	dln = dA / dsign;
 	dlo = dA / dsigo;
 	dfrac = exp(dln - dlo);
-//	dfrac = exp(dA/dsign) / exp(dA/dsigo); // MH: independent chain
-//	println(dsign ~ dfrac ~ dA);
 
 	if(!m_flML){ //parameter estimation
 		if(ranu(1,1) < dfrac){ //accept
@@ -1254,8 +1243,7 @@ RSVAZ::fLogPosDelta(const dp, const dfunc, const dsc, const dhe)
 	decl ddelta, dmu, dphi, dsig, drho, dnu;
 	decl dmu_lambda, dc, dk_delta, vy1t, vhb;
 
-	// set parameters	
-//	ddelta = dp / sqrt(1 + dp^2);
+	// set parameters
 	ddelta = 2 / (1 + exp(-dp)) - 1;
 	dmu = m_vpar[0];
 	dphi = m_vpar[1];
@@ -1294,24 +1282,19 @@ RSVAZ::SampDelta(const dmu, const dphi, const dsig, const drho, const ddeltao, c
 	m_vlambda = vlambda;
 	m_vy1 = vy1;
 
-//	dparo = dparm = ddeltao / sqrt(1 - ddeltao^2); //transformed
 	dparo = dparm = log((1+ddeltao)/(1-ddeltao)); //transformed
 	MaxBFGS(fLogPosDelta, &dparm, &dlm, 0, 1); //find mode
 	Num1Derivative(fLogPosDelta, dparm, &dsc);
 	Num2Derivative(fLogPosDelta, dparm, &dhe);
-//	dv = max(0.001, -1 / dhe);
 	dv = -1 / dhe;
 	dm = dparm + dv * dsc;
 	dparn = dm + sqrt(dv) * rann(1,1);
-//	ddeltan = dparn / sqrt(1 + dparn^2);
 	ddeltan = 2 / (1 + exp(-dparn)) - 1;
-	
+
 	// compute acceptance probability
-	fLogPosDelta(dparn, &dln, 0, 0); //log-posterior density at the candidate												    
-//	dhn = dlm + (dparn-dparm)*dsc - 0.5*(dparn-dparm)^2/dv - 1.5*log(1-ddeltan^2); //log-proposal density at the candidate 
-	dhn = dlm + (dparn-dparm)*dsc - 0.5*(dparn-dparm)^2/dv + log(2) - log(1-ddeltan^2); //log-proposal density at the candidate 
+	fLogPosDelta(dparn, &dln, 0, 0); //log-posterior density at the candidate
+	dhn = dlm + (dparn-dparm)*dsc - 0.5*(dparn-dparm)^2/dv + log(2) - log(1-ddeltan^2); //log-proposal density at the candidate
 	fLogPosDelta(dparo, &dlo, 0, 0); //log-posterior density at the old value
-//	dho = dlm + (dparo-dparm)*dsc - 0.5*(dparo-dparm)^2/dv - 1.5*log(1-ddeltao^2); //log-proposal density at the old value
 	dho = dlm + (dparo-dparm)*dsc - 0.5*(dparo-dparm)^2/dv + log(2) - log(1-ddeltao^2); //log-proposal density at the old value
 	dfrac = exp(dln - dhn - dlo + dho);
 
@@ -1405,7 +1388,7 @@ RSVAZ::SampSigu(const dxi, const vh, const vx)
 
 	if(!m_flML)	//parameter estimation
 		dsigu = sqrt(1 / rangamma(1, 1, dn/2, dd/2));
-	else	//ML estimation: generate sigma_u for m_kk = 0,1,...,6+2*m_flt+m_flb
+	else	//ML estimation: generate sigma_u for m_kk = 0,1,...,6+2*m_fls+2*m_flt
 	{
 		if(m_kk < 6+2*m_fls+2*m_flt)
 			dsigu = sqrt(1 / rangamma(1, 1, dn, dd));
@@ -1474,24 +1457,8 @@ RSVAZ::SampNu(const dmu, const dphi, const dsig, const drho, const ddelta, const
   	Num1Derivative(fPosNu, dpm, &dsc);
   	Num2Derivative(fPosNu, dpm, &dhe);
 
-//	dv = max(0.001, -1 / dhe);
 	dv = -1 / dhe;
 	dm = dpm + dv * dsc;
-
-//	if(m_flnuarmh){
-//		//generate a candidate by A-R algorithm
-//		do{
-//			dpn = dm + sqrt(dv) * rann(1,1);
-//			dnun = exp(dpn) + 4;
-//			fPosNu(dpn, &dln, 0, 0); //log-posterior density at the candidate value
-//			dhn = dlm + (dpn-dpm)*dsc - 0.5*(dpn-dpm)^2/dv - log(dnun-4); //log-proposal density at the candidate value
-//			if(m_k>=0) m_can++;
-//		}while(ranu(1,1) > exp(dln - dhn));
-//	}
-//	else{
-//		dpn = dm + sqrt(dv) * rann(1,1); //generate a candidate
-//		dnun = exp(dpn) + 4;
-//	}
 
 	dpn = dm + sqrt(dv) * rann(1,1); //generate a candidate
 	dnun = exp(dpn) + 4;
@@ -1519,7 +1486,7 @@ RSVAZ::SampNu(const dmu, const dphi, const dsig, const drho, const ddelta, const
 		else
 			dnun = dnuo;	//reject
 	}
-	else	//ML estimation: generate nu for m_kk = 0,1,2,...,6+2*m_flb
+	else	//ML estimation: generate nu for m_kk = 0,1,...,6+2*m_fls+2*m_flt
 	{
 		if(m_kk < 5+2*m_fls)
 		{
@@ -2025,11 +1992,8 @@ RSVAZ::ML(const nI, const nR, const nsim)
 	iBm = min(500, nsim/2);			//bandwidth
 
 	/*--- likelihood part ---*/
-	
 	vlik = PFilter(nI, nR);
-//	vlik = ones(3,1);
 
-	
 	/*--- posterior part ---*/
 
 	m_flML = 1;
