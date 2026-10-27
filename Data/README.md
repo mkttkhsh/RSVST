@@ -28,7 +28,7 @@ All CSVs are daily and (unless noted) have the layout
 | `Data/DJIA_rcc_rv_2009_2019.csv` (FS)      | `RSV_skewFS_run*.ox`                       | Date, return, RV |
 | `Data/Nikkei_rcc_rv_2009_2019.csv` (FS)    | `RSV_skewFS_run*.ox`                       | Date, return, RV |
 
-> **`_tick` suffix (DJIA only, IJF R2 2026):** the DJIA realized measures were
+> **`_tick` suffix (DJIA only, 2026 revision):** the DJIA realized measures were
 > recomputed from raw tick data to match the N225 construction convention
 > (RV5/BV=5-min, FTRK/MedRV=1-min; see `PROGRESS.md`). Files carrying the
 > `_tick` suffix are this recomputed version, kept alongside the original

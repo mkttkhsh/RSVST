@@ -1,7 +1,6 @@
 # Recomputation of the Azzalini forecasts (dual-output classes)
 
-Companion to Section 5.2 of the Supplementary Material and to Issue 1 of the response letter
-(IJF revision R3, 2026). See `../README.md`, section "Recomputation of the Azzalini forecasts".
+Companion to Section 5.2 of the Supplementary Material of the October 2026 revision. See `../README.md`, section "Recomputation of the Azzalini forecasts".
 
 - `RSVAZ.ox`, `SVAZ.ox`, `RSVAZ.h`, `SVAZ.h`, `ReportMCMC.h`: the model classes with the corrected
   one-day-ahead forecasting step (`sqrt(1-delta^2)`), extended to also compute the forecast under

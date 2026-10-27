@@ -49,7 +49,7 @@ the same p-value.
   Patton et al. 2019).
 - `function_plot_forecast.R`, `function_plot_forecast_2026.R` — plotting helpers.
 
-## Environment variables (IJF R3 pipeline)
+## Environment variables (October 2026 revision)
 The scripts reproduce the tables of the article with the following settings (all optional; unset
 reproduces the earlier behaviour and keeps old outputs untouched):
 - `RSVST_HL=r3corrected` — use the corrected Hansen-Lunde proxies (`Data/*_r3corrected.csv`) and

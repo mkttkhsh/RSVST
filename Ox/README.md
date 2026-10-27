@@ -27,7 +27,7 @@ fixed at 1 in the baseline; the `*_psi_*` scripts estimate it (see below).
 - `rsv_{az_n,az_sn,az_st,gh_st}_{djia,n225}_prediction.ox` — RSV models, main sample.
 - `sv_{az_sn,az_st,gh_st}_{djia,n225}_prediction.ox`        — SV counterparts.
 - `*_n225_prediction_2020.ox`                               — COVID-period sample (N225).
-- `*_djia_prediction_2020.ox` (IJF R2, 2026)                — COVID-period sample (DJIA), 15
+- `*_djia_prediction_2020.ox` (2026 revision)                — COVID-period sample (DJIA), 15
   models, mirroring N225's COVID-period coverage: RSV with psi fixed at 1
   (`rsv_az_{n,sn,st,t}`, `rsv_gh_st` — 5, baseline), RSV with psi free
   (`rsv_az_{n,sn,st,t}_psi`, `rsv_gh_st_psi` — 5, sensitivity; the AZ-family
@@ -99,7 +99,7 @@ DJIA counterpart.)
 Ox 8.x (Console/Professional). Packages used: `oxstd`, `oxprob`, `oxfloat`,
 `oxdraw`, and `maximize` (Fernández–Steel only).
 
-## Recomputation of the Azzalini forecasts (`az_recomputation/`, IJF R3, 2026-09/10)
+## Recomputation of the Azzalini forecasts (`az_recomputation/`, 2026-09/10)
 
 The one-day-ahead forecasting step of `RSVAZ.ox` / `SVAZ.ox` standardized the truncated-normal
 leverage term by `sqrt(1-c^2)` instead of `sqrt(1-delta^2)` (fixed in the classes above on

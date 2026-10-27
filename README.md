@@ -3,8 +3,8 @@
 Replication code for
 
 > Takahashi, M., Yamauchi, Y., Watanabe, T., and Omori, Y. *Realized Stochastic Volatility Models with
-> Skew-t Distributions for Volatility and Tail Risk Forecasting.* International Journal of Forecasting,
-> under revision (IJF-D-25-00621, third revision submitted October 2026). Preprint: [arXiv:2401.13179](https://arxiv.org/abs/2401.13179).
+> Skew-t Distributions for Volatility and Tail Risk Forecasting.* Submitted for publication.
+> Preprint: [arXiv:2401.13179](https://arxiv.org/abs/2401.13179).
 
 **Scope.** This repository contains the **source code only**: the Ox programs that estimate the SV and
 RSV models by MCMC and produce the rolling one-day-ahead forecasts, and the R scripts that construct
@@ -14,8 +14,8 @@ redistributed (see [`Data/README.md`](Data/README.md)); the MCMC output (tens of
 the scripts and is not stored here. The Bayesian EGARCH/REGARCH benchmarks were estimated with a
 separate program (see section 5) and enter the evaluation as external forecast files.
 
-**What changed in the third revision (October 2026).** Readers of earlier versions of the preprint
-should note three corrections, all documented in the Supplementary Material and in the response letter:
+**What changed in the October 2026 revision.** Readers of earlier versions of the preprint
+should note three corrections, all documented in the Supplementary Material of the revised version:
 (i) the one-day-ahead forecasting step of `SVGH.ox` contained a coding error (fixed 2026-09-16; all
 SV-GH-ST forecasts regenerated); (ii) the forecasting step of `RSVAZ.ox`/`SVAZ.ox` standardized the
 truncated-normal leverage term by `sqrt(1-c^2)` instead of `sqrt(1-delta^2)` (fixed 2026-09-26; all
