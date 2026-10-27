@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "Replication code: Realized Stochastic Volatility Models with Skew-t Distributions for Volatility and Tail Risk Forecasting"
+authors:
+  - family-names: "Takahashi"
+    given-names: "Makoto"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: "Yamauchi"
+    given-names: "Yuta"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: "Watanabe"
+    given-names: "Toshiaki"
+    # orcid: "https://orcid.org/TODO"
+  - family-names: "Omori"
+    given-names: "Yasuhiro"
+    orcid: "https://orcid.org/0000-0002-7896-6177"
+type: software
+license: MIT
+repository-code: "https://github.com/mkttkhsh/RSVST"
+preferred-citation:
+  type: article
+  title: "Realized Stochastic Volatility Models with Skew-t Distributions for Volatility and Tail Risk Forecasting"
+  authors:
+    - family-names: "Takahashi"
+      given-names: "Makoto"
+    - family-names: "Yamauchi"
+      given-names: "Yuta"
+    - family-names: "Watanabe"
+      given-names: "Toshiaki"
+    - family-names: "Omori"
+      given-names: "Yasuhiro"
+  journal: "International Journal of Forecasting"
+  year: 2026
+  notes: "Under revision (manuscript IJF-D-25-00621). Preprint: arXiv:2401.13179."

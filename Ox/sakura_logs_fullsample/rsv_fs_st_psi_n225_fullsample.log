@@ -1,0 +1,321 @@
+
+Ox 9.10 (Linux_64/Parallel) (C) J.A. Doornik, 1994-2023 (oxlang.dev)
+                                                             10:16:44/24-07-2026
+real data
+Nikkei225 data 2009-2019 (RV)
+----------------------------------------------------------------------------------------
+PRIOR SETTING
+-------------
+dm0_mu = 0
+dsig0_mu = 10000
+dm0_xi = 0
+dsig0_xi = 10000
+dn0_eta = 0.1
+dS0_eta = 0.1
+dn0_u = 0.1
+dS0_u = 0.1
+da0_phi = 1
+db0_phi = 1
+da0_rho = 1
+db0_rho = 1
+dn0_gamma = 1e-05
+dS0_gamma = 1e-05
+dn0_nu = 0.01
+dS0_nu = 0.2
+----------------------------------------------------------------------------------------
+INITIAL VALUES SETTING
+----------------------
+mu_ini = -0.5
+phi_ini = 0.9
+rho_ini = -0.4
+gamma_ini = 0.5
+sigeta_ini = 0.3
+xi_ini = -0.2
+sigu_ini = 0.05
+nu_ini = 10
+----------------------------------------------------------------------------------------
+Progress
+--|--|--|--|--|--|--|--|--|--|
+==|==|==|==|==|==|==|==|==|==|
+--------------------------
+
+-------------Mu--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:08:50
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         0.24346     0.078923     0.089948      0.24266      0.40099
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1          4.9250e-05       17.619
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1           0.0062288
+--------------------------
+
+-------------Phi--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:08:52
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         0.91240     0.010127      0.89184      0.91266      0.93145
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1           0.0019133       15.065
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1          0.00010256
+--------------------------
+
+-------------Rho--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:08:53
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1        -0.28636     0.038325     -0.36229     -0.28620     -0.21136
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1          2.4769e-05       22.105
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1           0.0014688
+--------------------------
+
+-------------Gamma--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:08:55
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         0.96879     0.031636      0.90794      0.96826       1.0322
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1          6.7359e-06       5.8133
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1           0.0010008
+--------------------------
+
+-------------SigEta--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:08:57
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         0.32385     0.019523      0.28701      0.32327      0.36335
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1             0.26777       55.280
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1          0.00038114
+--------------------------
+
+-------------Xi--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:08:58
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         -1.0142     0.031041      -1.0769      -1.0135     -0.95457
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1          0.00050200       68.604
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1          0.00096356
+--------------------------
+
+-------------SigU--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:09:00
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         0.39943     0.010789      0.37801      0.39950      0.42045
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1          6.6935e-05       29.501
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1          0.00011640
+--------------------------
+
+-------------Psi--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:09:01
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         0.89829     0.036628      0.82856      0.89765      0.97216
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1             0.58878       86.179
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1           0.0013416
+--------------------------
+
+-------------Nu--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:09:03
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1          29.126       8.0653       16.815       27.942       48.122
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1          5.0209e-07       4.1556
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1              65.049
+--------------------------
+
+-------------H--------------
+
+ -----------------------------Summary Statistics:-----------------------------
+
+ [Report MCMC Class] (Last Updated 2006/11/08)
+
+  Date:2026-07-24 21:09:05
+
+  Number of obs. is 90000
+
+ [Basic Summary Statistics] 
+
+                      Mean        Stdev         95%L       Median         95%U
+**  Param1         0.17398     0.031877      0.11255      0.17363      0.23883
+
+ Note: *(**) -> 95(99)% credible interval does not contain 0.
+
+ [Diagnostic Statistics] 
+
+                    Geweke         Inef
+Param1          0.00038835       86.995
+
+ [Covariance (Lower), Variance (Diagonal) and Correlation (Upper)]
+
+                    Param1
+Param1           0.0010162
+=============================================
+Computation Time: 10h/52m/21s
