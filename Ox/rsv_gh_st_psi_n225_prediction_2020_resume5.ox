@@ -3,7 +3,7 @@
 **  with generalized hyperbolic skew t-distribution
 **  using class RSVGH.ox
 **
-**  IJF R2 (2026): resume script for the N225 COVID-period psi-free GH-ST
+**  2026 revision: resume script for the N225 COVID-period psi-free GH-ST
 **  rolling run, which diverged at window t=5 (2020-01-14) -- mu jumped
 **  0.25->6.7 and nu pinned at exactly 4.0000 with near-zero posterior
 **  variance, a clear MCMC failure, then propagated forward through every
@@ -31,7 +31,7 @@
 
 main()
 {
-	ranseed(20260721); // IJF R2: explicit distinct seed for the resume, see header comment
+	ranseed(20260721); // 2026 revision: explicit distinct seed for the resume, see header comment
 
 	decl sdata, mdat, vdate, vdr, vrv, vrk, my;
 	decl nobs, nest, nprd, vburn;

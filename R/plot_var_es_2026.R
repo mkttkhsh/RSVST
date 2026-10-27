@@ -17,7 +17,7 @@ path.data <- "../Data/"
 path.result <- "./prediction_results_2026/"
 path.figure <- "./figure2026/"
 
-# 2026-09-28 (IJF R3, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
+# 2026-09-28 (October 2026 revision, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
 # (Data/*_hl_roll*_r3corrected.csv) and to separate output directories (*_r3corrected/); old results stay untouched.
 hl.tag <- Sys.getenv("RSVST_HL", "")
 if (nzchar(hl.tag)) {
@@ -28,7 +28,7 @@ if (nzchar(hl.tag)) {
   cat("RSVST_HL =", hl.tag, "\n")
 }
 
-# 2026-10-01 (IJF R3, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
+# 2026-10-01 (October 2026 revision, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
 # psi-free RSV-AZ variants) to the corrected-recomputation aggregates (Ox/az_recomputation/aggregated/<tag>/ (override with RSVST_AZ_DIR), read in the
 # merge scripts) and appends _<tag> to the result/figure directories (after the RSVST_HL suffix). Old results stay untouched.
 az.tag <- Sys.getenv("RSVST_AZ", "")

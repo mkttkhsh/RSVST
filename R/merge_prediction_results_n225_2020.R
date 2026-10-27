@@ -26,7 +26,7 @@ model.n <- length(model.names)
 path.data <- "../Data/"
 path.out <- "./prediction_results_n225_2020/"
 
-# 2026-09-28 (IJF R3, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
+# 2026-09-28 (October 2026 revision, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
 # (Data/*_hl_roll*_r3corrected.csv) and to separate output directories (*_r3corrected/); old results stay untouched.
 hl.tag <- Sys.getenv("RSVST_HL", "")
 if (nzchar(hl.tag)) {
@@ -37,7 +37,7 @@ if (nzchar(hl.tag)) {
   cat("RSVST_HL =", hl.tag, "\n")
 }
 
-# 2026-10-01 (IJF R3, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
+# 2026-10-01 (October 2026 revision, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
 # psi-free RSV-AZ variants) to the corrected-recomputation aggregates (Ox/az_recomputation/aggregated/<tag>/ (override with RSVST_AZ_DIR), read in the
 # merge scripts) and appends _<tag> to the result/figure directories (after the RSVST_HL suffix). Old results stay untouched.
 az.tag <- Sys.getenv("RSVST_AZ", "")
@@ -157,7 +157,7 @@ for (f.i in 1:f.n) {
 }
 
 # save forecasts
-# 2026-10-11 (IJF R3, PROGRESS.md §100-101): RSVST_MASK_DIR=<dir> drops the rows whose date is listed in <dir>/<NAME>_exclude_dates.csv
+# 2026-10-11 (October 2026 revision, PROGRESS.md §100-101): RSVST_MASK_DIR=<dir> drops the rows whose date is listed in <dir>/<NAME>_exclude_dates.csv
 # (NAME = DJIA | N225 | DJIA_2020 | N225_2020) from every merged data frame, so that all models and proxies are evaluated on the same
 # reduced sample (exclusion sensitivity for the windows that did not pass the MCMC confirmation pass; rule §7-6). Used with RSVST_AZ=<tag>_excl.
 .mask.dir <- Sys.getenv("RSVST_MASK_DIR", "")

@@ -12,7 +12,7 @@
 
 main()
 {
-	ranseed(20260725); // IJF R2: original run on shared server severely stalled (3-3.5x slower than sibling models); reseeded rerun on dedicated Sakura server
+	ranseed(20260725); // 2026 revision: original run on shared server severely stalled (3-3.5x slower than sibling models); reseeded rerun on dedicated Sakura server
 	decl sdata, mdat, vdate, vdr, vy;
 	decl nobs, nest, nprd, vburn;
 	decl flt, flb, smodel, sdir;

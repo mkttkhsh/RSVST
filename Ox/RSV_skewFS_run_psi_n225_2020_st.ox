@@ -6,7 +6,7 @@
 #include<RSV_skewFS.ox>
 // Free-psi variant, N225 COVID-period (2012-2020) sample, RSV-FS-ST (skew-t, default dist).
 // Switch index/distribution via the data string and SetIsT/SetIsSkew, as in the base run file.
-// IJF R2 (2026): single-process sequential rolling loop (not the parallel
+// 2026 revision: single-process sequential rolling loop (not the parallel
 // 11-way chunk split used for the DJIA main-sample FS run) — matches how
 // the AZ/GH COVID-period scripts run, for consistency.
 
@@ -52,7 +52,7 @@ main()
 	/*
 	"est": estimation;
 	"ML": calculate the marginal likelihood;
-	"pred": prediction, single sequential process (IJF R2 2026: no parallel split).
+	"pred": prediction, single sequential process (2026 revision: no parallel split).
 	*/
 
 	//These are the settings for prediction

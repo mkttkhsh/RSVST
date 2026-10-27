@@ -1,4 +1,4 @@
-# IJF R2 (2026): consolidate the psi-free N225 COVID-period RSV-FS-{SN,ST}
+# 2026 revision: consolidate the psi-free N225 COVID-period RSV-FS-{SN,ST}
 # raw per-window draws (h_pred_s_<t>.csv / y_pred_s_<t>.csv) into per-model
 # var_/es_/volf_ summary files, matching the layout
 # merge_prediction_results_n225_2020.R expects. Adapted from

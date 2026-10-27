@@ -1,4 +1,4 @@
-# IJF R3 (2026-09-28, PROGRESS.md §80-81): Hansen–Lunde (2005) rolling correction for the evaluation proxies, N225 main sample (2009-06-01 to 2019-09-30, 590 forecasts).
+# October 2026 revision (2026-09-28, PROGRESS.md §80-81): Hansen–Lunde (2005) rolling correction for the evaluation proxies, N225 main sample (2009-06-01 to 2019-09-30, 590 forecasts).
 # CORRECTED IMPLEMENTATION. The previous version of this script (output *_hl_roll*.csv, kept for reproducibility) had
 #  (1) [main samples] returns taken from the UNFILTERED file (data$rcc, from 2000/1996) instead of the filtered sample,
 #  (2) [all samples] the adjusted proxy computed from the proxy of the last day of the estimation window (row t+nest-1)

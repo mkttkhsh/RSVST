@@ -1,4 +1,4 @@
-# IJF R2 (2026): volatility forecast evaluation (QLIKE/MSE, GW06 test, MCS)
+# 2026 revision: volatility forecast evaluation (QLIKE/MSE, GW06 test, MCS)
 # for the psi sensitivity analysis -- RSV psi=1 vs psi-free, DJIA COVID
 # period. DJIA counterpart of examine_forecast_vol_n225_2020_psi_sensitivity.R.
 # Unlike N225 (7 RSV distributions), the DJIA COVID batch has no FS models,
@@ -20,7 +20,7 @@ library(sandwich)
 
 path.result <- "./prediction_results_djia_2020/"
 
-# 2026-09-28 (IJF R3, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
+# 2026-09-28 (October 2026 revision, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
 # (Data/*_hl_roll*_r3corrected.csv) and to separate output directories (*_r3corrected/); old results stay untouched.
 hl.tag <- Sys.getenv("RSVST_HL", "")
 if (nzchar(hl.tag)) {
@@ -31,7 +31,7 @@ if (nzchar(hl.tag)) {
   cat("RSVST_HL =", hl.tag, "\n")
 }
 
-# 2026-10-01 (IJF R3, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
+# 2026-10-01 (October 2026 revision, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
 # psi-free RSV-AZ variants) to the corrected-recomputation aggregates (Ox/az_recomputation/aggregated/<tag>/ (override with RSVST_AZ_DIR), read in the
 # merge scripts) and appends _<tag> to the result/figure directories (after the RSVST_HL suffix). Old results stay untouched.
 az.tag <- Sys.getenv("RSVST_AZ", "")
@@ -119,14 +119,14 @@ for (i in 1:(k - 1)) {
 
 ###### Model confidence set of Hansen et al. (2011) #####
 colnames(loss.mse) <- model.names
-set.seed(20260801)  # reproducible MCS bootstrap (IJF R2, 2026-08-01)
+set.seed(20260801)  # reproducible MCS bootstrap (2026 revision-08-01)
 mse.mcs <- MCSprocedure(loss.mse, alpha = 0.1, B = 1000, statistic = "Tmax", k = 10)
 mse.mcs.pval <- mse.mcs@show[, c(1, 3)]
 mse.mcs.pval.names <- row.names(mse.mcs.pval)
 mse.mcs.n <- length(mse.mcs.pval.names)
 
 colnames(loss.qlike) <- model.names
-set.seed(20260801)  # reproducible MCS bootstrap (IJF R2, 2026-08-01)
+set.seed(20260801)  # reproducible MCS bootstrap (2026 revision-08-01)
 qlike.mcs <- MCSprocedure(loss.qlike, alpha = 0.1, B = 1000, statistic = "Tmax", k = 10)
 qlike.mcs.pval <- qlike.mcs@show[, c(1, 3)]
 # BUGFIX (2026-08-01): was qlike.mcs@Info$model.names (original input order),

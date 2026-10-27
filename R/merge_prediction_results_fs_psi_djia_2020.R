@@ -1,4 +1,4 @@
-# IJF R2 (2026-08-19): consolidate the psi-free DJIA COVID-period RSV-FS-{SN,ST}
+# 2026 revision (2026-08-19): consolidate the psi-free DJIA COVID-period RSV-FS-{SN,ST}
 # raw per-window draws (h_pred_s_<t>.csv / y_pred_s_<t>.csv) into per-model
 # var_/es_/volf_ summary files. DJIA counterpart of
 # merge_prediction_results_fs_psi_n225_2020.R.

@@ -1,5 +1,5 @@
 #!/bin/bash
-# IJF R2 (2026): launch the 14 single full-sample in-sample psi-free
+# 2026 revision: launch the 14 single full-sample in-sample psi-free
 # estimations (main-sample period, NOT rolling) -- one MCMC run per model,
 # not 590 rolling windows. Reports the posterior distribution / 95% CI of
 # psi for the sensitivity analysis (Comment 2), to assess whether psi≈1 is

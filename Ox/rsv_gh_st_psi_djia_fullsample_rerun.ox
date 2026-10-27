@@ -3,7 +3,7 @@
 **  with generalized hyperbolic skew t-distribution
 **  using class RSVGH.ox
 **
-**  IJF R2 (2026): single full-sample in-sample psi-free estimation
+**  2026 revision: single full-sample in-sample psi-free estimation
 **  (main-sample period, not rolling) -- reports the posterior distribution
 **  / 95% CI of psi for the sensitivity analysis (Comment 2). Distinct from
 **  the 590-window rolling *_prediction.ox script, which is not re-run this
@@ -18,7 +18,7 @@
 
 main()
 {
-	ranseed(20260724); // IJF R2: original run diverged (mu jumped to 5.79, nu pinned at exactly 4.0000) -- new seed for rerun
+	ranseed(20260724); // 2026 revision: original run diverged (mu jumped to 5.79, nu pinned at exactly 4.0000) -- new seed for rerun
 
 	decl sdata, mdat, vdate, vdr, vrv, vrk, my;
 	decl nobs;

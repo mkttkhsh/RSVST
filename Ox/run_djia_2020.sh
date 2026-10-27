@@ -1,5 +1,5 @@
 #!/bin/bash
-# IJF R2 (2026): launch all 15 DJIA COVID-period (2012-2020) rolling MCMC
+# 2026 revision: launch all 15 DJIA COVID-period (2012-2020) rolling MCMC
 # prediction models as background processes, one per model, mirroring the
 # copy_oxfile.sh/runpred.sh parallelism already used for the FS models.
 #

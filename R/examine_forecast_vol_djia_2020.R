@@ -18,7 +18,7 @@ path.data <- "../Data/"
 path.result <- "./prediction_results_djia_2020/"
 path.figure <- "./figure_djia_2020/"
 
-# 2026-09-28 (IJF R3, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
+# 2026-09-28 (October 2026 revision, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
 # (Data/*_hl_roll*_r3corrected.csv) and to separate output directories (*_r3corrected/); old results stay untouched.
 hl.tag <- Sys.getenv("RSVST_HL", "")
 if (nzchar(hl.tag)) {
@@ -29,7 +29,7 @@ if (nzchar(hl.tag)) {
   cat("RSVST_HL =", hl.tag, "\n")
 }
 
-# 2026-10-01 (IJF R3, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
+# 2026-10-01 (October 2026 revision, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
 # psi-free RSV-AZ variants) to the corrected-recomputation aggregates (Ox/az_recomputation/aggregated/<tag>/ (override with RSVST_AZ_DIR), read in the
 # merge scripts) and appends _<tag> to the result/figure directories (after the RSVST_HL suffix). Old results stay untouched.
 az.tag <- Sys.getenv("RSVST_AZ", "")
@@ -48,11 +48,11 @@ rv.sets <- c("RV5", "RKth2", "BV", "MedRV")
 rv.n <- length(rv.sets)
 
 # set model names
-# IJF R2 (2026-08-01): SV-AZ-ST restored after re-estimation (see
+# revision (2026-08-01): SV-AZ-ST restored after re-estimation (see
 # merge_prediction_results_djia_2020.R for the full note). GH-ST is
 # permanently excluded for both RSV and SV on this sample. The four FS models
 # were added 2026-08-06 after all of them finished and passed qc_relative.py.
-# IJF R3 (2026-09-24): SV-GH-ST restored after the forecast-step bug in SVGH.ox was fixed and
+# revision (2026-09-24): SV-GH-ST restored after the forecast-step bug in SVGH.ox was fixed and
 # all 253 windows were re-estimated (PROGRESS.md section 74). RSV-GH-ST stays excluded.
 model.names <- c(paste0("SV-", c("N", "T", "AZ-SN", "AZ-ST", "FS-SN", "FS-ST", "GH-ST")),
                  paste0("RSV-", c("N", "T", "AZ-SN", "AZ-ST", "FS-SN", "FS-ST")),
@@ -155,7 +155,7 @@ for(i in 1:(k-1)){
 
 ###### Model confidence set of Hansen et al. (2011) for MSE #####
 colnames(loss.mse) <- model.names
-set.seed(20260801)  # reproducible MCS bootstrap (IJF R2)
+set.seed(20260801)  # reproducible MCS bootstrap (2026 revision)
 mse.mcs <- MCSprocedure(loss.mse, alpha = 0.1, B=1000, statistic = "Tmax", k = 10)
 mse.mcs.pval <- mse.mcs@show[, c(1,3)]
 mse.mcs.pval.names <- row.names(mse.mcs.pval)
@@ -163,7 +163,7 @@ mse.mcs.n <- length(mse.mcs.pval.names)
 
 ###### Model confidence set of Hansen et al. (2011) for QLIKE #####
 colnames(loss.qlike) <- model.names
-set.seed(20260801)  # reproducible MCS bootstrap (IJF R2)
+set.seed(20260801)  # reproducible MCS bootstrap (2026 revision)
 qlike.mcs <- MCSprocedure(loss.qlike, alpha = 0.1, B=1000, statistic = "Tmax", k = 10)
 qlike.mcs.pval <- qlike.mcs@show[, c(1,3)]
 # BUGFIX (2026-08-01): this used qlike.mcs@Info$model.names, which is the

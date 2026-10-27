@@ -12,13 +12,13 @@ f.n <- length(f.sets)
 data.name <- "DJIA"
 
 # set sets of true returns and RVs
-# IJF R2 (2026): DJIA は本サンプル・COVID期とも close-grid規約で統一
+# 2026 revision: DJIA は本サンプル・COVID期とも close-grid規約で統一
 # （渡部先生 2026-07-16 指示：COVID期だけopen-gridにするのは整合性が取れない）。
 # construct_rv_hl_djia_2020_tick.R の出力に対応。
 true.sets <- c("DJIA_rcc_rv5_rkth2_bv_medrv_2012_2020_hl_roll_tick")
 
 # set model names
-# IJF R2 (2026-08-01): SV-AZ-ST is back in. Its rolling output was corrupted in
+# revision (2026-08-01): SV-AZ-ST is back in. Its rolling output was corrupted in
 # windows 31-252; it was re-estimated one window per process with a cold start
 # and a fresh seed, and all 222 windows now agree with the other SV models to
 # within 0.2 in log volatility (qc_relative.py). sv_az_n and rsv_az_t_psi were
@@ -43,7 +43,7 @@ model.n <- length(model.names)
 path.data <- "../Data/"
 path.out <- "./prediction_results_djia_2020/"
 
-# 2026-09-28 (IJF R3, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
+# 2026-09-28 (October 2026 revision, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
 # (Data/*_hl_roll*_r3corrected.csv) and to separate output directories (*_r3corrected/); old results stay untouched.
 hl.tag <- Sys.getenv("RSVST_HL", "")
 if (nzchar(hl.tag)) {
@@ -54,7 +54,7 @@ if (nzchar(hl.tag)) {
   cat("RSVST_HL =", hl.tag, "\n")
 }
 
-# 2026-10-01 (IJF R3, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
+# 2026-10-01 (October 2026 revision, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
 # psi-free RSV-AZ variants) to the corrected-recomputation aggregates (Ox/az_recomputation/aggregated/<tag>/ (override with RSVST_AZ_DIR), read in the
 # merge scripts) and appends _<tag> to the result/figure directories (after the RSVST_HL suffix). Old results stay untouched.
 az.tag <- Sys.getenv("RSVST_AZ", "")
@@ -178,7 +178,7 @@ for (f.i in 1:f.n) {
 }
 
 # save forecasts
-# 2026-10-11 (IJF R3, PROGRESS.md §100-101): RSVST_MASK_DIR=<dir> drops the rows whose date is listed in <dir>/<NAME>_exclude_dates.csv
+# 2026-10-11 (October 2026 revision, PROGRESS.md §100-101): RSVST_MASK_DIR=<dir> drops the rows whose date is listed in <dir>/<NAME>_exclude_dates.csv
 # (NAME = DJIA | N225 | DJIA_2020 | N225_2020) from every merged data frame, so that all models and proxies are evaluated on the same
 # reduced sample (exclusion sensitivity for the windows that did not pass the MCMC confirmation pass; rule §7-6). Used with RSVST_AZ=<tag>_excl.
 .mask.dir <- Sys.getenv("RSVST_MASK_DIR", "")

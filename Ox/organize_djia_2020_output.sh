@@ -1,5 +1,5 @@
 #!/bin/bash
-# IJF R2 (2026): merge_prediction_results_{az,gh}_2020.ox read per-window
+# 2026 revision: merge_prediction_results_{az,gh}_2020.ox read per-window
 # output from DJIA_prediction_2020/files/, but the rolling-forecast scripts
 # write directly into DJIA_prediction_2020/ (same convention already used by
 # the main-sample and N225 pipelines). Run this once estimation is finished,

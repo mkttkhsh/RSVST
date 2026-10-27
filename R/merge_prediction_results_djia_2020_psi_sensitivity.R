@@ -1,4 +1,4 @@
-# IJF R2 (2026): merge psi=1 (main spec) vs psi-free (sensitivity) RSV and
+# 2026 revision: merge psi=1 (main spec) vs psi-free (sensitivity) RSV and
 # REGARCH forecasts for the DJIA COVID period, side by side, for the psi
 # sensitivity analysis (Reviewer 1 Comment 2). DJIA counterpart of
 # merge_prediction_results_n225_2020_psi_sensitivity.R.
@@ -26,7 +26,7 @@ rm(list = ls())
 library(readr)
 library(readxl)
 
-# IJF R2 (2026-07-31): RSV-GH-ST excluded (both psi=1 and psi-free) --
+# 2026 revision (2026-07-31): RSV-GH-ST excluded (both psi=1 and psi-free) --
 # its volatility forecast is off-scale relative to realized volatility in
 # essentially every window, a pervasive structural divergence (see the main
 # COVID section), not something a psi-sensitivity comparison can speak to.
@@ -45,7 +45,7 @@ path.out <- "./prediction_results_djia_2020/"
 path.regarch <- "../REGARCH_Bayes/"
 true.sets <- "DJIA_rcc_rv5_rkth2_bv_medrv_2012_2020_hl_roll_tick"
 
-# 2026-09-28 (IJF R3, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
+# 2026-09-28 (October 2026 revision, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
 # (Data/*_hl_roll*_r3corrected.csv) and to separate output directories (*_r3corrected/); old results stay untouched.
 hl.tag <- Sys.getenv("RSVST_HL", "")
 if (nzchar(hl.tag)) {
@@ -56,7 +56,7 @@ if (nzchar(hl.tag)) {
   cat("RSVST_HL =", hl.tag, "\n")
 }
 
-# 2026-10-01 (IJF R3, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
+# 2026-10-01 (October 2026 revision, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
 # psi-free RSV-AZ variants) to the corrected-recomputation aggregates (Ox/az_recomputation/aggregated/<tag>/ (override with RSVST_AZ_DIR), read in the
 # merge scripts) and appends _<tag> to the result/figure directories (after the RSVST_HL suffix). Old results stay untouched.
 az.tag <- Sys.getenv("RSVST_AZ", "")
@@ -189,7 +189,7 @@ names(df.es.1p) <- c("date", "Return", model.names)
 df.es.5p <- data.frame(date, rcc, es5p.cols)
 names(df.es.5p) <- c("date", "Return", model.names)
 
-# 2026-10-11 (IJF R3, PROGRESS.md §100-101): RSVST_MASK_DIR=<dir> drops the rows whose date is listed in <dir>/<NAME>_exclude_dates.csv
+# 2026-10-11 (October 2026 revision, PROGRESS.md §100-101): RSVST_MASK_DIR=<dir> drops the rows whose date is listed in <dir>/<NAME>_exclude_dates.csv
 # (NAME = DJIA | N225 | DJIA_2020 | N225_2020) from every merged data frame, so that all models and proxies are evaluated on the same
 # reduced sample (exclusion sensitivity for the windows that did not pass the MCMC confirmation pass; rule §7-6). Used with RSVST_AZ=<tag>_excl.
 .mask.dir <- Sys.getenv("RSVST_MASK_DIR", "")

@@ -1,4 +1,4 @@
-# IJF R2 (2026): VaR/ES forecast evaluation (violation rate, DQ test, FZ0
+# 2026 revision: VaR/ES forecast evaluation (violation rate, DQ test, FZ0
 # loss, MCS) for the psi sensitivity analysis -- RSV psi=1 vs psi-free, DJIA
 # COVID period. DJIA counterpart of
 # examine_forecast_var_es_n225_2020_psi_sensitivity.R. Unlike N225 (7 RSV
@@ -20,7 +20,7 @@ source("function_forecast_evaluation.R")
 
 path.result <- "./prediction_results_djia_2020/"
 
-# 2026-09-28 (IJF R3, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
+# 2026-09-28 (October 2026 revision, PROGRESS.md §81): RSVST_HL=r3corrected switches to the corrected Hansen-Lunde proxies
 # (Data/*_hl_roll*_r3corrected.csv) and to separate output directories (*_r3corrected/); old results stay untouched.
 hl.tag <- Sys.getenv("RSVST_HL", "")
 if (nzchar(hl.tag)) {
@@ -31,7 +31,7 @@ if (nzchar(hl.tag)) {
   cat("RSVST_HL =", hl.tag, "\n")
 }
 
-# 2026-10-01 (IJF R3, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
+# 2026-10-01 (October 2026 revision, PROGRESS.md §86): RSVST_AZ=<tag> (dualfixed | dualorig) switches the AZ-family forecasts (SV/RSV-AZ-SN/ST and the
 # psi-free RSV-AZ variants) to the corrected-recomputation aggregates (Ox/az_recomputation/aggregated/<tag>/ (override with RSVST_AZ_DIR), read in the
 # merge scripts) and appends _<tag> to the result/figure directories (after the RSVST_HL suffix). Old results stay untouched.
 az.tag <- Sys.getenv("RSVST_AZ", "")
@@ -91,14 +91,14 @@ loss.fz0.5p <- t(loss5p[, , 5])
 
 ##### Model confidence set of Hansen et al. (2011) using FZ0 loss #####
 colnames(loss.fz0.1p) <- model.names
-set.seed(20260801)  # reproducible MCS bootstrap (IJF R2, 2026-08-17)
+set.seed(20260801)  # reproducible MCS bootstrap (2026 revision-08-17)
 loss.fz0.1p.mcs <- MCSprocedure(loss.fz0.1p, alpha = 0.1, B = 1000, statistic = "Tmax", k = 10)
 loss.fz0.1p.mcs.pval <- loss.fz0.1p.mcs@show[, c(1, 3)]
 loss.fz0.1p.mcs.pval.names <- row.names(loss.fz0.1p.mcs.pval)
 loss.fz0.1p.mcs.n <- length(loss.fz0.1p.mcs.pval.names)
 
 colnames(loss.fz0.5p) <- model.names
-set.seed(20260801)  # reproducible MCS bootstrap (IJF R2, 2026-08-17)
+set.seed(20260801)  # reproducible MCS bootstrap (2026 revision-08-17)
 loss.fz0.5p.mcs <- MCSprocedure(loss.fz0.5p, alpha = 0.1, B = 1000, statistic = "Tmax", k = 10)
 loss.fz0.5p.mcs.pval <- loss.fz0.5p.mcs@show[, c(1, 3)]
 loss.fz0.5p.mcs.pval.names <- row.names(loss.fz0.5p.mcs.pval)

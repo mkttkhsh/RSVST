@@ -59,7 +59,7 @@ RSV_skewFS::RSV_skewFS(const mdata, const cT, const prediction_size, const predi
 			m_my = loadmat("../Data/Nikkei_rcc_rk_2009_2019.csv")[0:(m_cT-1)][1]' * 100;
 			m_mx = log(loadmat("../Data/Nikkei_rcc_rk_2009_2019.csv")[0:(m_cT-1)][2]' * (100^2));
 		}
-		// IJF R2 (2026): COVID-period (2012-2020) samples, added for the psi-free sensitivity analysis.
+		// 2026 revision: COVID-period (2012-2020) samples, added for the psi-free sensitivity analysis.
 		if(mdata == "Nikkei-RV-2020"){
 			println("Nikkei225 data 2012-2020 (RV)");
 			m_my = loadmat("../Data/N225_rcc_rv5_rkth2_bv_medrv_2012_2020.csv")[0:(m_cT-1)][1]' * 100;

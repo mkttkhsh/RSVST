@@ -1,5 +1,5 @@
 #!/bin/bash
-# IJF R2 (2026): launch all 5 N225 COVID-period (2012-2020) psi-free RSV
+# 2026 revision: launch all 5 N225 COVID-period (2012-2020) psi-free RSV
 # models (AZ family: N/SN/ST/T + GH-ST) as background processes, one per
 # model. Needs ~5 free cores; each runs its own full 242-window rolling
 # loop serially. FS family (SN/ST) is a separate, heavier job — see

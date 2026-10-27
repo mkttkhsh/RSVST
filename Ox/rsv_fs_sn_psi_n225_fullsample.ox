@@ -4,7 +4,7 @@
 #include<oxdraw.h>
 #import <maximize>
 #include<RSV_skewFS.ox>
-// IJF R2 (2026): single full-sample in-sample estimation (main-sample
+// 2026 revision: single full-sample in-sample estimation (main-sample
 // period, 2009-06..2019-09, "Nikkei-RV-2009"), RSV-FS-ST (skew-t, default
 // dist), psi free. Companion to the RSVAZ/RSVGH psi-free fullsample
 // scripts -- FS was missing from that set; added here using the class's

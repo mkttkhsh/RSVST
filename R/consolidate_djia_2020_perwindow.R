@@ -1,4 +1,4 @@
-# IJF R2 (2026): consolidate per-window var_/es_/volf_<model>_<t>.csv output
+# 2026 revision: consolidate per-window var_/es_/volf_<model>_<t>.csv output
 # (t=0..252) from the DJIA COVID-period (2012-2020) rolling estimation into
 # single per-model var_/es_/volf_<model>.csv files, replacing the Ox-level
 # merge_prediction_results_{az,gh}_2020.ox step (no local Ox install).

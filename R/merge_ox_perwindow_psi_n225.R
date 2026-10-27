@@ -1,4 +1,4 @@
-# IJF R2 (2026): per-window -> per-model consolidation for the psi-free
+# 2026 revision: per-window -> per-model consolidation for the psi-free
 # N225 COVID-period RSV forecasts, done in R instead of Ox (no local Ox
 # install) -- replicates merge_prediction_results_az_2020.ox / _gh_2020.ox
 # for the "_psi" models only (the non-psi models were already consolidated
