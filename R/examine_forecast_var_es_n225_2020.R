@@ -241,8 +241,8 @@ for (i in 1:model.n) {
   xxx <- model.names[i]
   # 1%
   xxx <- paste0(xxx, " & $", format(round(mat.loss1p[i, 1]*100, 2), nsmall = 2)) # violation rate
-  xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, 4], 2), nsmall = 2)) # p-value of DQ test
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, "UC"], 2), nsmall = 2)) # p-value of UC test (2026-10-30)
+  xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, 4], 2), nsmall = 2)) # p-value of DQ test
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, 2], 4), nsmall = 4)) # FZ0 loss
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, 3], 2), nsmall = 2)) # p-value of MCS
   # MCS membership following Hansen, Lunde and Nason (2011): report both levels.
@@ -260,8 +260,8 @@ for (i in 1:model.n) {
   xxx <- paste0(xxx, " & ")
   # 5%
   xxx <- paste0(xxx, " & $", format(round(mat.loss5p[i, 1]*100, 2), nsmall = 2)) # violation rate
-  xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, 4], 2), nsmall = 2)) # p-value of DQ test
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, "UC"], 2), nsmall = 2)) # p-value of UC test (2026-10-30)
+  xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, 4], 2), nsmall = 2)) # p-value of DQ test
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, 2], 4), nsmall = 4)) # FZ0 loss
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, 3], 2), nsmall = 2)) # p-value of MCS
   # MCS membership following Hansen, Lunde and Nason (2011): report both levels.
