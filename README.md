@@ -24,6 +24,14 @@ multi-chain convergence checks); (iii) the rolling Hansen-Lunde adjustment of th
 was not aligned with the estimation window and the forecast target day (fixed 2026-09-28; previous
 scripts kept in `R/previous_versions/`). All volatility forecasts are evaluated with the predictive mean.
 
+**What changed in the November 2026 revision.** (iv) The dynamic quantile test in
+`R/function_forecast_evaluation.R` did not implement the statistic of Engle and Manganelli (2004): it
+divided by the residual variance of the hit regression times the number of regressors instead of by
+`alpha*(1-alpha)`, and used one lag, so the DQ p-values in earlier versions were too large (fixed
+2026-10-30; now four lags of the violation indicator and the VaR forecast as regressors). The unconditional
+coverage test of Kupiec (1995) was added (`UCtest`), and the VaR/ES scripts write it as the last column
+(`UC`) of `*_rate_fz0_mcs_dq_gw06test*.csv`. No forecast, loss, or MCS result changed.
+
 > The code is consolidated into two top-level folders, `Ox/` and `R/`, each kept
 > flat so the scripts' relative paths keep working: the Ox scripts use
 > `#include<RSVAZ.ox>` and `loadmat("../Data/...")`, the R scripts use
@@ -103,8 +111,8 @@ reproducibility/
 4. **Evaluate** (`R/`)
    - Volatility: `examine_forecast_vol_2026.R` — MSE, QLIKE, Giacomini–White
      tests, and the **Model Confidence Set** (Hansen, Lunde & Nason, 2011).
-   - Tail risk: `examine_forecast_var_es_2026.R` — violation rates, Dynamic
-     Quantile test, FZ0 loss, GW tests, MCS.
+   - Tail risk: `examine_forecast_var_es_2026.R` — violation rates, unconditional
+     coverage (Kupiec) and Dynamic Quantile (Engle–Manganelli, 4 lags) tests, FZ0 loss, GW tests, MCS.
    - COVID period: the `*_n225_2020.R` counterparts.
    The MCS is reported at **both the 75% and 90% confidence levels** (`**` = 75%
    MCS, `*` = 90% MCS); the MCS p-value is level-independent, so both sets are

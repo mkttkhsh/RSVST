@@ -81,10 +81,10 @@ for (i in 1:model.n) {
 DQtest1p <- matrix(NA, model.n, 2)
 DQtest5p <- matrix(NA, model.n, 2)
 for (i in 1:model.n) {
-  DQtest1p[i, 1] <- DQtest(loss1p[i, , 3], f.var1p[[i + 2]])
-  DQtest1p[i, 2] <- DQtest(loss1p[i, , 4], f.es1p[[i + 2]])
-  DQtest5p[i, 1] <- DQtest(loss5p[i, , 3], f.var5p[[i + 2]])
-  DQtest5p[i, 2] <- DQtest(loss5p[i, , 4], f.es5p[[i + 2]])
+  DQtest1p[i, 1] <- DQtest(loss1p[i, , 3], f.var1p[[i + 2]], 0.01)  # Engle-Manganelli (2004), 4 hit lags (corrected 2026-10-30)
+  DQtest1p[i, 2] <- DQtest_resid(loss1p[i, , 4], f.es1p[[i + 2]])  # ES residual check (not reported)
+  DQtest5p[i, 1] <- DQtest(loss5p[i, , 3], f.var5p[[i + 2]], 0.05)  # Engle-Manganelli (2004), 4 hit lags (corrected 2026-10-30)
+  DQtest5p[i, 2] <- DQtest_resid(loss5p[i, , 4], f.es5p[[i + 2]])  # ES residual check (not reported)
 }
 
 # compute violation rates and average losses
@@ -208,20 +208,28 @@ for (i in 1:model.n) {
   }
 }
 
+##### unconditional coverage test of Kupiec (1995) (added 2026-10-30, IJF R4) #####
+UCtest1p <- matrix(NA, model.n, 1)
+UCtest5p <- matrix(NA, model.n, 1)
+for (i in 1:model.n) {
+  UCtest1p[i, 1] <- UCtest(loss1p[i, , 1], 0.01)
+  UCtest5p[i, 1] <- UCtest(loss5p[i, , 1], 0.05)
+}
+
 ##### save violation rates, average losses, and DQ test results #####
 # 1%
-df.loss1p <- data.frame(loss1p.mean[, c(1,5)], mcs.pval1p, DQtest1p, stat1p, prop1p, pval1p)
+df.loss1p <- data.frame(loss1p.mean[, c(1,5)], mcs.pval1p, DQtest1p, stat1p, prop1p, pval1p, UCtest1p)
 names(df.loss1p) <- c("1%", "FZ0", "MCS p-value", "DQ", "DES", 
                     paste0("Test Stat vs ", sub("RSV-", "", model.names)),
                     paste0("Prop vs ", sub("RSV-", "", model.names)),
-                    paste0("P-value vs ", sub("RSV-", "", model.names)))
+                    paste0("P-value vs ", sub("RSV-", "", model.names)), "UC")
 write.csv(df.loss1p, paste0(path.result, data.name, "_forecast_var_es_1p_rate_fz0_mcs_dq_gw06test.csv"))
 # 5%
-df.loss5p <- data.frame(loss5p.mean[, c(1,5)], mcs.pval5p, DQtest5p, stat5p, prop5p, pval5p)
+df.loss5p <- data.frame(loss5p.mean[, c(1,5)], mcs.pval5p, DQtest5p, stat5p, prop5p, pval5p, UCtest5p)
 names(df.loss5p) <- c("1%", "FZ0", "MCS p-value", "DQ", "DES", 
                       paste0("Test Stat vs ", sub("RSV-", "", model.names)),
                       paste0("Prop vs ", sub("RSV-", "", model.names)),
-                      paste0("P-value vs ", sub("RSV-", "", model.names)))
+                      paste0("P-value vs ", sub("RSV-", "", model.names)), "UC")
 write.csv(df.loss5p, paste0(path.result, data.name, "_forecast_var_es_5p_rate_fz0_mcs_dq_gw06test.csv"))
 
 ##### output for latex ######
@@ -234,6 +242,7 @@ for (i in 1:model.n) {
   # 1%
   xxx <- paste0(xxx, " & $", format(round(mat.loss1p[i, 1]*100, 2), nsmall = 2)) # violation rate
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, 4], 2), nsmall = 2)) # p-value of DQ test
+  xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, "UC"], 2), nsmall = 2)) # p-value of UC test (2026-10-30)
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, 2], 4), nsmall = 4)) # FZ0 loss
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss1p[i, 3], 2), nsmall = 2)) # p-value of MCS
   # MCS membership following Hansen, Lunde and Nason (2011): report both levels.
@@ -252,6 +261,7 @@ for (i in 1:model.n) {
   # 5%
   xxx <- paste0(xxx, " & $", format(round(mat.loss5p[i, 1]*100, 2), nsmall = 2)) # violation rate
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, 4], 2), nsmall = 2)) # p-value of DQ test
+  xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, "UC"], 2), nsmall = 2)) # p-value of UC test (2026-10-30)
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, 2], 4), nsmall = 4)) # FZ0 loss
   xxx <- paste0(xxx, "$ & $", format(round(mat.loss5p[i, 3], 2), nsmall = 2)) # p-value of MCS
   # MCS membership following Hansen, Lunde and Nason (2011): report both levels.
